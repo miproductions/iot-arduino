@@ -24,7 +24,7 @@ char authMethod[] = "use-token-auth";
 
 
 //This is the auth token obtained on registering the device in the https://internetofthings.ibmcloud.com/dashboard/#
-char authToken[] = "W7TXtNbehlf7Bq5BEm";
+char authToken[] = "W7TXtNbehlf7Bq5MEb";
 
 
 //The convention to be followed is <orgid>.messaging.internetofthings.ibmcloud.com

@@ -8,35 +8,23 @@ byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x03 };
 int mqttPort = 1883;
 
 char topic[] = "iot-2/evt/status/fmt/json";
+char subtopic[] = "iot-2/cmd/+/fmt/json";
 
-
-//Create an organization in https://internetofthings.ibmcloud.com/dashboard/#/organizations/ and paste the orgid
 char organization[] = "w8wx0";
 char typeId[] = "ArduinoUno";
 
-
-//This is the MAC Address of the Ardunio device
 char deviceId[] = "00aabbccde03";
 
-
-//Currently only Auth Token is allowed
 char authMethod[] = "use-token-auth";
 
+char authToken[] = "W7TXtNbehlf7Bq5BEm";
 
-//This is the auth token obtained on registering the device in the https://internetofthings.ibmcloud.com/dashboard/#
-char authToken[] = "W7TXtNbehlf7Bq5MEb";
-
-
-//The convention to be followed is <orgid>.messaging.internetofthings.ibmcloud.com
 char registeredMQTTDNS[] = "w8wx0.messaging.internetofthings.ibmcloud.com";
 
-
-//The convention to be followed is d:<orgid>.ArduinoUno:<MAC Address>
 char clientId[] = "d:w8wx0:ArduinoUno:00aabbccde03";
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void callback(char* topic, byte* payload, unsigned int length);
 
-}
 
 EthernetClient ethClient;
 PubSubClient client(registeredMQTTDNS, mqttPort, callback, ethClient);
@@ -45,6 +33,10 @@ void setup() {
   Serial.begin(9600);
   Ethernet.begin(mac);
  
+  if( ! client.connected()) {
+    client.connect(clientId, authMethod, authToken);
+  }
+  client.subscribe(subtopic); 
   delay(2000);
 }
 
@@ -63,9 +55,34 @@ void loop() {
   Serial.println(json);
   client.publish(topic, json );
 
+
   client.loop();
   delay(1000);
 }
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.println("Message has arrived");
+  
+/*  char p[100];
+  int count = 0;
+  for(count = 0 ; count < length ; count++) {
+    p[count] = payload[count];
+  }
+  p[count] = '\0';
+
+  Serial.println(p);
+*/
+
+  char * msg = (char *)malloc(length * sizeof(char));
+  int count = 0;
+  for(count = 0 ; count < length ; count++) {
+    msg[count] = payload[count];
+  }
+  msg[count] = '\0';
+  Serial.println(msg);
+  free(msg);
+}
+
 
 
 /*

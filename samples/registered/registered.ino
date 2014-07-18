@@ -2,6 +2,8 @@
 #include <Ethernet.h>
 #include <PubSubClient.h>
 
+int ledPin = 13;
+
 // Update these with values suitable for your network.
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x03 };
 
@@ -63,16 +65,6 @@ void loop() {
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.println("Message has arrived");
   
-/*  char p[100];
-  int count = 0;
-  for(count = 0 ; count < length ; count++) {
-    p[count] = payload[count];
-  }
-  p[count] = '\0';
-
-  Serial.println(p);
-*/
-
   char * msg = (char *)malloc(length * sizeof(char));
   int count = 0;
   for(count = 0 ; count < length ; count++) {
@@ -80,6 +72,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   msg[count] = '\0';
   Serial.println(msg);
+  
+  if(length > 0) {
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);  
+  }
+
   free(msg);
 }
 

@@ -14,8 +14,11 @@ Common setup for the 2 flows
 2. Connect Ethernet cable to the Ethernet / Wifi shield 
 3. Install sketch on desktop / laptop
 4. Add mqtt library, for Ardunio, developed by Nicholas O'Leary (https://github.com/knolleary/pubsubclient) in the sketch
+
 	a) This means downloading the file
-	b) Copying the content in the Arduino Library 
+	b) Copying the content in the Arduino Library, after creating a folder PubSubClient
+	c) Checking whether the file has got added in the libraries in sketch
+
 5. Connect the USB cable to the Arduino Uno and other end to desktop / laptop which has the sketch installed on it
 6. The samples folder of this repository contains 2 codes - 
 	a) Quickstart flow

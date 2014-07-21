@@ -13,14 +13,17 @@ Common setup for the 2 flows
 1. Connect Ethernet / Wifi shield to Arduino Uno
 2. Connect Ethernet cable to the Ethernet / Wifi shield 
 3. Install sketch on desktop / laptop
-4. Connect the USB cable to the Arduino Uno and other end to desktop / laptop which has the sketch installed on it
-5. The samples folder of this repository contains 2 codes - 
+4. Add mqtt library, for Ardunio, developed by Nicholas O'Leary (https://github.com/knolleary/pubsubclient) in the sketch
+	a) This means downloading the file
+	b) Copying the content in the Arduino Library 
+5. Connect the USB cable to the Arduino Uno and other end to desktop / laptop which has the sketch installed on it
+6. The samples folder of this repository contains 2 codes - 
 	a) Quickstart flow
 	b) Registered flow
-6. Compile the 2 flows
-7. Depending upon the requirement, copy one of the flows to the Arduino device
-8. Reset the Ethernet / Wifi shield
-9. Wait for about 10 seconds and the flow starts working
+7. Compile the 2 flows
+8. Depending upon the requirement, push one of the flows to the Arduino device
+9. Reset the Ethernet / Wifi shield
+10. Wait for about 10 seconds and the flow starts working
 
 
 Quickstart flow

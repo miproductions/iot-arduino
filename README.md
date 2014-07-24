@@ -8,22 +8,20 @@ The events that are emitted in this sample are:
 + Internal sensor temperature 
 
 
-Common setup for the 2 flows
+Pre-requisiste setup for the 2 flows
 ============================
 1. Connect Ethernet / Wifi shield to Arduino Uno
 2. Connect Ethernet cable to the Ethernet / Wifi shield 
 3. Install sketch on desktop / laptop
-4. Add mqtt library, for Ardunio, developed by Nicholas O'Leary (https://github.com/knolleary/pubsubclient) in the sketch
-
-	a) This means downloading the file
-	b) Copying the content in the Arduino Library, after creating a folder PubSubClient
-	c) Checking whether the file has got added in the libraries in sketch
+4. Download mqtt library, for Ardunio, developed by Nicholas O'Leary from this link (https://github.com/knolleary/pubsubclient) in the sketch
+	a) Copy the contents of the PubSubClient folder in the Arduino Library, after creating a folder PubSubClient
+	b) Check if the library, inside sketch, reflects the changes
 
 5. Connect the USB cable to the Arduino Uno and other end to desktop / laptop which has the sketch installed on it
-6. The samples folder of this repository contains 2 codes - 
+6. The samples folder of this repository (https://github.com/ibm-messaging/iot-arduino) contains 2 folders, each containining 1 flow - 
 	a) Quickstart flow
 	b) Registered flow
-7. Compile the 2 flows
+7. Compile the 2 skectch codes (corresponding to the flows)
 8. Depending upon the requirement, push one of the flows to the Arduino device
 9. Reset the Ethernet / Wifi shield
 10. Wait for about 10 seconds and the flow starts working
@@ -31,7 +29,7 @@ Common setup for the 2 flows
 
 Quickstart flow
 =======================
-1. Modify the clientId, in the sketch code, by providing the values in the following format "d:quickstart:iotsample-arduino:aabbccde02", by replacing "aabbccde02" with the MAC Address
+1. Modify the clientId, in the sketch code, by providing the values in the following format "d:quickstart:iotsample-arduino:aabbccde02", by replacing "aabbccde02" with the MAC Address of the device
 2. Open the quickstart dashboard (http://quickstart.internetofthings.ibmcloud.com/#/) 
 3. Provide the MAC Address (in case of the example, its aabbccde02) in the textbox "Ready to View data?"
 

@@ -8,7 +8,7 @@ The events that are emitted in this sample are:
 + Internal sensor temperature 
 
 
-Pre-requisiste setup for the 2 flows
+Pre-requisite setup for the 2 flows
 ============================
 1. Connect Ethernet / Wifi shield to Arduino Uno
 2. Connect Ethernet cable to the Ethernet / Wifi shield 

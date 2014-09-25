@@ -13,9 +13,9 @@ Pre-requisiste setup for the 2 flows
 1. Connect Ethernet / Wifi shield to Arduino Uno
 2. Connect Ethernet cable to the Ethernet / Wifi shield 
 3. Install sketch on desktop / laptop
-4. Download mqtt library, for Ardunio, developed by Nicholas O'Leary from this link (https://github.com/knolleary/pubsubclient) in the sketch
-	a) Copy the contents of the PubSubClient folder in the Arduino Library, after creating a folder PubSubClient
-	b) Check if the library, inside sketch, reflects the changes
+4. Download Paho mqtt library, for Ardunio, from this link (https://www.eclipse.org/downloads/download.php?file=/paho/arduino.zip) in the sketch
+	a) To load it into the Arduino IDE, the zip file should be downloaded intact, without unzipping.
+	b) Then in the IDE: Select Sketch -> Import Library -> Add Library  and select the zip file
 
 5. Connect the USB cable to the Arduino Uno and other end to desktop / laptop which has the sketch installed on it
 6. The samples folder of this repository (https://github.com/ibm-messaging/iot-arduino) contains 2 folders, each containining 1 flow - 
@@ -42,7 +42,7 @@ This has 2 flows
 
 Registered Flow from device and to device
 ===========================================
-1. Modify the organization, authToken, in the sketch code
+1. Modify the organization, authToken, deviceId in the sketch code
 2. Modify the registeredMQTTDNS, in the sketch code, by providing the values in the following format "w8wx0.messaging.internetofthings.ibmcloud.com", by replacing "w8wx0" with the organization
 3. Modify the clientId, in the sketch code, by providing the values in the following format "d:w8wx0:ArduinoUno:00aabbccde03", by replacing "aabbccde03" with the MAC Address and "w8wx0" with the organization
 4. Use mqttpublisher / mqttsubscriber to publish and subscribe the commands / events sent to / received from the Arduino Uno

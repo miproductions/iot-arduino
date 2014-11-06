@@ -1,7 +1,7 @@
 Arduino Uno Sample
 ====================
 
-This repository contains the quickstart and registered device sample, and contains samples for connecting Arduino Uno devices to the IBM Internet of Things Cloud
+This repository contains the quickstart and registered device sample, and contains samples for connecting Arduino Uno devices to the IBM Internet of Things Foundation
 
 The events that are emitted in this sample are:
 

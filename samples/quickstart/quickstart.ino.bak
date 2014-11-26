@@ -59,7 +59,7 @@ void loop() {
   Serial.print("\t\t");
 
   deviceEvent.toCharArray(buffer, 60);
-  Serial.println(buffer);
+  Serial.print(buffer);
   message.payload = buffer; 
   message.payloadlen = strlen(buffer);
   

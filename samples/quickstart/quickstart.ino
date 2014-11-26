@@ -4,19 +4,22 @@
 #include <Countdown.h>
 #include <MQTTClient.h>
 
+#define MS_PROXY "quickstart.messaging.internetofthings.ibmcloud.com"
+#define MQTT_PORT 1883
+#define MQTT_MAX_PACKET_SIZE 100
 
 // Update these with values suitable for your network.
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };
-char quickstartMQTTDNS[] = "quickstart.messaging.internetofthings.ibmcloud.com";
-int mqttPort = 1883;
-//The convention to be followed is d:quickstart:iotsample-arduino:<MAC Address>
-char clientId[] = "d:quickstart:iotsample-arduino:00aabbccde02";
-char topic[] = "iot-2/evt/status/fmt/json";
 
-#define MQTT_MAX_PACKET_SIZE 100
+//The convention to be followed is d:quickstart:iotsample-arduino:<MAC Address>
+#define MQTT_CLIENTID "d:quickstart:iotsample-arduino:00aabbccde02"
+
+#define MQTT_TOPIC "iot-2/evt/status/fmt/json"
   
 EthernetStack ipstack;  
 MQTT::Client<EthernetStack, Countdown, MQTT_MAX_PACKET_SIZE> client(ipstack);
+
+String deviceEvent;
 
 void setup() {
   Serial.begin(9600);
@@ -27,31 +30,40 @@ void setup() {
 void loop() {
   int rc = -1;
   if (!client.isConnected()) {
-    Serial.println("Connecting\n");
+    Serial.println("Connecting to IoT Foundation for publishing Temperature");
     while (rc != 0) {
-      rc = ipstack.connect(quickstartMQTTDNS, mqttPort);
+      rc = ipstack.connect(MS_PROXY, MQTT_PORT);
     }
     MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
     data.MQTTVersion = 3;
-    data.clientID.cstring = clientId;
+    data.clientID.cstring = MQTT_CLIENTID;
     rc = -1;
     while ((rc = client.connect(data)) != 0)
       ;
-    Serial.println("Connected\n");
+    Serial.println("Connected successfully\n");
+    Serial.println("Temperature(in C)\tDevice Event (JSON)");
+    Serial.println("____________________________________________________________________________");
   }
 
-  char json[56] = "{\"d\":{\"myName\":\"Arduino Uno\",\"temperature\":";
-  dtostrf(getTemp(),1,2, &json[43]);
-  json[48] = '}';
-  json[49] = '}';
-  json[50] = '\0';
-  Serial.println(json);
   MQTT::Message message;
   message.qos = MQTT::QOS0; 
   message.retained = false;
-  message.payload = json; 
-  message.payloadlen = strlen(json);
-  rc = client.publish(topic, message);
+
+  deviceEvent = String("{\"d\":{\"myName\":\"Arduino Uno\",\"temperature\":");
+  char buffer[60];
+  dtostrf(getTemp(),1,2, buffer);  
+  deviceEvent += buffer;
+  deviceEvent += "}}";
+  Serial.print("\t");
+  Serial.print(buffer);
+  Serial.print("\t\t");
+
+  deviceEvent.toCharArray(buffer, 60);
+  Serial.print(buffer);
+  message.payload = buffer; 
+  message.payloadlen = strlen(buffer);
+  
+  rc = client.publish(MQTT_TOPIC, message);
   if (rc != 0) {
     Serial.print("return code from publish was ");
     Serial.println(rc);

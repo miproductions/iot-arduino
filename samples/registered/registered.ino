@@ -15,12 +15,26 @@
 
 int ledPin = 13;
 
+// org=o6ftph
+// type=ArduinoUno
+// id=00aabbafde02
+// auth-method=token
+// auth-token=yU)Ihfyit9NQgGU(Z
+// forg=o6ftph
+// type=ArduinoUno
+// id=00aabbafde02
+// auth-method=token
+// auth-token=yU)Ihfyit9NQgGU(Zf
 
-#define CLIENT_ID "d:uguhsp:iotsample-arduino:00aabbccde03"
-#define MS_PROXY "uguhsp.messaging.internetofthings.ibmcloud.com"
-#define AUTHTOKEN "password"
+// 2nd key: a-o6ftph-i9a1zsr5fx
+// 2nd token: BvGW?&MNjzwHTGVrdm
+
+#define CLIENT_ID "d:o6ftph:ArduinoUno:00aabbafde02"
+// #define CLIENT_ID "d:o6ftph:iotsample-arduino:00aabbafde02"
+#define MS_PROXY "o6ftph.messaging.internetofthings.ibmcloud.com"
+#define AUTHTOKEN "yU)Ihfyit9NQgGU(Zf"
 // Update these with values suitable for your network.
-byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x03 };
+byte mac[] = { 0x00, 0xAA, 0xBB, 0xAF, 0xDE, 0x02 };
 
 void callback(char* topic, byte* payload, unsigned int length);
 
@@ -100,7 +114,7 @@ void loop() {
     Serial.print("Message publish failed with return code : ");
     Serial.println(rc);
   }
-  client.yield(1000);
+  client.yield(5000);
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {

@@ -9,10 +9,10 @@
 #define MQTT_MAX_PACKET_SIZE 100
 
 // Update these with values suitable for your network.
-byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };
+byte mac[] = { 0x00, 0xAA, 0xBB, 0xAF, 0xDE, 0x02 };
 
 //The convention to be followed is d:quickstart:iotsample-arduino:<MAC Address>
-#define MQTT_CLIENTID "d:quickstart:iotsample-arduino:00aabbccde02"
+#define MQTT_CLIENTID "d:quickstart:iotsample-arduino:00aabbafde02"
 
 #define MQTT_TOPIC "iot-2/evt/status/fmt/json"
   
@@ -70,7 +70,7 @@ void loop() {
     Serial.print("return code from publish was ");
     Serial.println(rc);
   }
-  client.yield(1000);
+  client.yield(5000);
 }
 
 /*
